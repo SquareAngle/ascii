@@ -1,0 +1,15 @@
+ImageIO==2.38.2
+iniconfig==2.3.1
+lazy-loader==0.6
+llvmlite==0.50.0
+networkx==3.7
+numba==0.68.1
+numpy==2.5.5
+packaging==26.3
+pillow==13.0.0
+pluggy==1.7.0
+Pygments==2.21.0
+pytest==9.2.0
+scikit-image==0.26.0
+scipy==1.18.1
+tifffile==2026.11.16

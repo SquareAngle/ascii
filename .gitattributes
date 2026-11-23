@@ -1,0 +1,2 @@
+evaluation/results/**/initial.txt text eol=lf whitespace=-blank-at-eol,-blank-at-eof
+evaluation/results/**/final.txt text eol=lf whitespace=-blank-at-eol,-blank-at-eof

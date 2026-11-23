@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "structure-aiss"
+version = "0.1.0"
+description = "Contour-based ASCII art with AISS and constrained deformation"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "Pillow>=11",
+    "scikit-image>=0.24",
+    "numba>=0.61",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+ascii-aiss = "aiss.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["aiss*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+aiss = ["assets/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
