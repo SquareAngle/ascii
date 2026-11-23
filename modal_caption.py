@@ -17,13 +17,16 @@ Full run (resumes: pieces already in the output file are skipped):
 By default only pieces that fit the 64x32 training canvas are captioned; pass
 --max-h 0 --max-w 0 for all of them.
 """
+import os
+
 import modal
 
 MODEL = "Qwen/Qwen3-VL-8B-Instruct"
 GPU = "L40S"  # 48 GB: the 8B model in bf16 plus a large KV cache for batching
 
 app = modal.App("artscii-caption")
-data_vol = modal.Volume.from_name("artscii", create_if_missing=True)
+VOLUME = os.environ.get("ARTSCII_VOLUME", "artscii")  # dataset + captions volume
+data_vol = modal.Volume.from_name(VOLUME, create_if_missing=True)
 hf_vol = modal.Volume.from_name("hf-cache", create_if_missing=True)  # model weights
 image = (
     modal.Image.debian_slim(python_version="3.12")
@@ -124,6 +127,6 @@ def main(limit: int = 20, out: str = "", model: str = MODEL, max_h: int = 32,
          max_w: int = 64, seed: int = 0):
     out = out or ("pilot" if limit > 0 else "captions")
     print(caption.remote(limit, out, model, max_h, max_w, seed))
-    print(f"modal volume get artscii captions/{out}.jsonl .")
+    print(f"modal volume get {VOLUME} captions/{out}.jsonl .")
     if limit > 0:
-        print(f"modal volume get artscii captions/{out}.html .")
+        print(f"modal volume get {VOLUME} captions/{out}.html .")
