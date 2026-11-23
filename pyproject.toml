@@ -1,0 +1,28 @@
+[project]
+name = "artscii"
+version = "0.1.0"
+description = "Text-to-ASCII sketch art with LLaDA-style masked diffusion"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch==2.7.1",
+    "numpy",
+    "requests",
+    "beautifulsoup4",
+    "lxml",
+    "tqdm",
+    "pyyaml",
+    "matplotlib",
+    "pillow",
+]
+
+# cu126 wheels still ship sm_70 kernels (V100).
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+
+[tool.setuptools]
+packages = ["artscii"]
