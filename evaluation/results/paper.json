@@ -1,0 +1,40 @@
+[
+  {
+    "columns": 22,
+    "rows": 9,
+    "vertices": 74,
+    "segments": 72,
+    "initial_score": 1.9377630327019082,
+    "final_score": 1.9377630327019082,
+    "iterations": 5000,
+    "accepted": 0,
+    "best_iteration": 0,
+    "stopping_reason": "patience",
+    "runtime_seconds": 1.935226249974221,
+    "optimization_seconds": 1.8132447500247508,
+    "id": "domed-chapel",
+    "group": "paper",
+    "variant": "main",
+    "input_sha256": "98f8f9a8c73754282e00e1b3fd19307b09cdd0d3ac0d2403f18c72db4ed9e7bd",
+    "max_displacement_pixels": 0.0
+  },
+  {
+    "columns": 26,
+    "rows": 10,
+    "vertices": 114,
+    "segments": 112,
+    "initial_score": 1.9027945977486371,
+    "final_score": 1.6861948795088355,
+    "iterations": 35893,
+    "accepted": 30,
+    "best_iteration": 30893,
+    "stopping_reason": "patience",
+    "runtime_seconds": 11.20315216697054,
+    "optimization_seconds": 11.081785916001536,
+    "id": "steam-engine",
+    "group": "paper",
+    "variant": "main",
+    "input_sha256": "12220f3fd99ec359218a8215b791963f1c6d4221e8074059cd56326ecfeed4fb",
+    "max_displacement_pixels": 6.082762530298219
+  }
+]

@@ -1,0 +1,356 @@
+{
+  "config": {
+    "columns": 22,
+    "seed": 0,
+    "patience": 5000,
+    "max_proposals": null,
+    "padding": 2.0,
+    "max_segment_length": 24.0,
+    "gaussian_sigma": 1.4,
+    "accessibility_rays": 32,
+    "relative_length": "unit_identity",
+    "accessibility_weights": "inverse_distance",
+    "temperature": "cooling",
+    "proposal": "uniform_radius",
+    "acceptance": "metropolis",
+    "font": {
+      "path": "LiberationMono-Regular.ttf",
+      "cell_width": 12,
+      "cell_height": 20,
+      "size": 20,
+      "baseline": 15,
+      "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+      "sha256": "f2b83c763e8afd21709333370bed4774337fae82267937e2b5aea7e2fbd922c1"
+    },
+    "raster": {
+      "threshold": 128,
+      "polarity": "auto",
+      "simplify": 1.0
+    }
+  },
+  "columns": 22,
+  "rows": 9,
+  "vertices": 74,
+  "segments": 72,
+  "initial_score": 1.9377630327019082,
+  "final_score": 1.9377630327019082,
+  "iterations": 5000,
+  "accepted": 41,
+  "best_iteration": 0,
+  "stopping_reason": "patience",
+  "runtime_seconds": 1.3365904579986818,
+  "optimization_seconds": 1.3362367500085384,
+  "history": [
+    {
+      "iteration": 0,
+      "accepted": 0,
+      "current": 1.9377630327019082,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 100,
+      "accepted": 5,
+      "current": 2.228404452643408,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 200,
+      "accepted": 6,
+      "current": 2.1453479494308634,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 300,
+      "accepted": 9,
+      "current": 2.144364538760569,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 400,
+      "accepted": 10,
+      "current": 2.1450316777863208,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 500,
+      "accepted": 10,
+      "current": 2.1450316777863208,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 600,
+      "accepted": 10,
+      "current": 2.1450316777863208,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 700,
+      "accepted": 12,
+      "current": 2.141014279902944,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 800,
+      "accepted": 12,
+      "current": 2.141014279902944,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 900,
+      "accepted": 13,
+      "current": 2.1372909738877217,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1000,
+      "accepted": 14,
+      "current": 2.1321765726447066,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1100,
+      "accepted": 16,
+      "current": 2.1323109452159636,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1200,
+      "accepted": 17,
+      "current": 2.09636872509754,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1300,
+      "accepted": 17,
+      "current": 2.09636872509754,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1400,
+      "accepted": 18,
+      "current": 2.0964637233400167,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1500,
+      "accepted": 19,
+      "current": 2.0949573505449326,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1600,
+      "accepted": 21,
+      "current": 2.0722515824494834,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1700,
+      "accepted": 22,
+      "current": 2.0643324087442654,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1800,
+      "accepted": 22,
+      "current": 2.0643324087442654,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1900,
+      "accepted": 22,
+      "current": 2.0643324087442654,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2000,
+      "accepted": 23,
+      "current": 2.063042762388439,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2100,
+      "accepted": 24,
+      "current": 2.062728788684369,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2200,
+      "accepted": 24,
+      "current": 2.062728788684369,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2300,
+      "accepted": 24,
+      "current": 2.062728788684369,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2400,
+      "accepted": 24,
+      "current": 2.062728788684369,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2500,
+      "accepted": 25,
+      "current": 2.0454572835991907,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2600,
+      "accepted": 25,
+      "current": 2.0454572835991907,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2700,
+      "accepted": 27,
+      "current": 2.035280901720954,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2800,
+      "accepted": 27,
+      "current": 2.035280901720954,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2900,
+      "accepted": 28,
+      "current": 2.0351476817228016,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3000,
+      "accepted": 29,
+      "current": 2.031688489599525,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3100,
+      "accepted": 31,
+      "current": 2.0095225127274525,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3200,
+      "accepted": 32,
+      "current": 2.009521872348542,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3300,
+      "accepted": 32,
+      "current": 2.009521872348542,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3400,
+      "accepted": 32,
+      "current": 2.009521872348542,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3500,
+      "accepted": 33,
+      "current": 2.004668831129467,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3600,
+      "accepted": 34,
+      "current": 2.00155517420947,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3700,
+      "accepted": 35,
+      "current": 2.001504274612019,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3800,
+      "accepted": 36,
+      "current": 1.999384737211348,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3900,
+      "accepted": 37,
+      "current": 1.9814284946008267,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4000,
+      "accepted": 38,
+      "current": 1.9813516898485224,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4100,
+      "accepted": 39,
+      "current": 1.9444114488915796,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4200,
+      "accepted": 39,
+      "current": 1.9444114488915796,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4300,
+      "accepted": 39,
+      "current": 1.9444114488915796,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4400,
+      "accepted": 40,
+      "current": 1.9442070411995773,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4500,
+      "accepted": 40,
+      "current": 1.9442070411995773,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4600,
+      "accepted": 40,
+      "current": 1.9442070411995773,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4700,
+      "accepted": 40,
+      "current": 1.9442070411995773,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4800,
+      "accepted": 41,
+      "current": 1.9399379344968313,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4900,
+      "accepted": 41,
+      "current": 1.9399379344968313,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 5000,
+      "accepted": 41,
+      "current": 1.9399379344968313,
+      "best": 1.9377630327019082
+    }
+  ],
+  "id": "domed-chapel",
+  "group": "paper",
+  "variant": "uniform-radius",
+  "input_sha256": "98f8f9a8c73754282e00e1b3fd19307b09cdd0d3ac0d2403f18c72db4ed9e7bd",
+  "max_displacement_pixels": 0.0
+}

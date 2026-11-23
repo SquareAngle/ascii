@@ -1,0 +1,356 @@
+{
+  "config": {
+    "columns": 22,
+    "seed": 0,
+    "patience": 5000,
+    "max_proposals": null,
+    "padding": 2.0,
+    "max_segment_length": 24.0,
+    "gaussian_sigma": 1.4,
+    "accessibility_rays": 32,
+    "relative_length": "unit_identity",
+    "accessibility_weights": "inverse_distance",
+    "temperature": "cooling",
+    "proposal": "lattice",
+    "acceptance": "printed",
+    "font": {
+      "path": "LiberationMono-Regular.ttf",
+      "cell_width": 12,
+      "cell_height": 20,
+      "size": 20,
+      "baseline": 15,
+      "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+      "sha256": "f2b83c763e8afd21709333370bed4774337fae82267937e2b5aea7e2fbd922c1"
+    },
+    "raster": {
+      "threshold": 128,
+      "polarity": "auto",
+      "simplify": 1.0
+    }
+  },
+  "columns": 22,
+  "rows": 9,
+  "vertices": 74,
+  "segments": 72,
+  "initial_score": 1.9377630327019082,
+  "final_score": 1.9377630327019082,
+  "iterations": 5000,
+  "accepted": 4451,
+  "best_iteration": 0,
+  "stopping_reason": "patience",
+  "runtime_seconds": 7.3211659580119886,
+  "optimization_seconds": 7.320811458979733,
+  "history": [
+    {
+      "iteration": 0,
+      "accepted": 0,
+      "current": 1.9377630327019082,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 100,
+      "accepted": 96,
+      "current": 272.7015569400228,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 200,
+      "accepted": 195,
+      "current": 5155058.058798354,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 300,
+      "accepted": 292,
+      "current": 13946222688.3615,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 400,
+      "accepted": 388,
+      "current": 5661562100.586202,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 500,
+      "accepted": 484,
+      "current": 3371830.100280874,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 600,
+      "accepted": 582,
+      "current": 15922934.507612478,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 700,
+      "accepted": 680,
+      "current": 38614543.24726893,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 800,
+      "accepted": 777,
+      "current": 61160058.71534858,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 900,
+      "accepted": 871,
+      "current": 81812497.74327303,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1000,
+      "accepted": 965,
+      "current": 1212893514.2109826,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1100,
+      "accepted": 1058,
+      "current": 985591252.130274,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1200,
+      "accepted": 1145,
+      "current": 10251638934.50079,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1300,
+      "accepted": 1239,
+      "current": 2418853559.4619265,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1400,
+      "accepted": 1331,
+      "current": 8114794924.079017,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1500,
+      "accepted": 1423,
+      "current": 4292177364309553.5,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1600,
+      "accepted": 1514,
+      "current": 2.036491252491957e+19,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1700,
+      "accepted": 1607,
+      "current": 1.0723748339068497e+23,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1800,
+      "accepted": 1694,
+      "current": 1.9727313608703607e+23,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1900,
+      "accepted": 1784,
+      "current": 1.0120964815364858e+21,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2000,
+      "accepted": 1878,
+      "current": 3.890837992298654e+21,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2100,
+      "accepted": 1949,
+      "current": 6.310440666132959e+21,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2200,
+      "accepted": 2043,
+      "current": 3.678308788911079e+21,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2300,
+      "accepted": 2138,
+      "current": 503693434224402.56,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2400,
+      "accepted": 2231,
+      "current": 1046911568716542.6,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2500,
+      "accepted": 2321,
+      "current": 59993736641287.5,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2600,
+      "accepted": 2415,
+      "current": 394428607057096.44,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2700,
+      "accepted": 2510,
+      "current": 7.847397970415465e+19,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2800,
+      "accepted": 2602,
+      "current": 3.672773771130886e+17,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2900,
+      "accepted": 2694,
+      "current": 5.4854831164532694e+22,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3000,
+      "accepted": 2787,
+      "current": 2.968105022530398e+21,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3100,
+      "accepted": 2872,
+      "current": 5.92306171212397e+27,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3200,
+      "accepted": 2929,
+      "current": 2.9016935176309726e+29,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3300,
+      "accepted": 2981,
+      "current": 1.3544299934458058e+37,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3400,
+      "accepted": 3031,
+      "current": 2.504196614846183e+34,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3500,
+      "accepted": 3117,
+      "current": 1.318128730364966e+24,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3600,
+      "accepted": 3211,
+      "current": 9.564567800625082e+22,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3700,
+      "accepted": 3306,
+      "current": 173546432035009.66,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3800,
+      "accepted": 3402,
+      "current": 603157422822148.5,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3900,
+      "accepted": 3493,
+      "current": 137432360006237.81,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4000,
+      "accepted": 3587,
+      "current": 5.611567440352936e+21,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4100,
+      "accepted": 3681,
+      "current": 4.290661167101914e+23,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4200,
+      "accepted": 3765,
+      "current": 9.419822852465269e+27,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4300,
+      "accepted": 3846,
+      "current": 1.033751513116785e+31,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4400,
+      "accepted": 3906,
+      "current": 3.365990978677217e+29,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4500,
+      "accepted": 3985,
+      "current": 7.559703025355356e+24,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4600,
+      "accepted": 4076,
+      "current": 2.609374129556072e+29,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4700,
+      "accepted": 4170,
+      "current": 3.121242415882493e+26,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4800,
+      "accepted": 4263,
+      "current": 7.671168578572713e+23,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4900,
+      "accepted": 4360,
+      "current": 6.596607621333976e+23,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 5000,
+      "accepted": 4451,
+      "current": 4.242844039641706e+26,
+      "best": 1.9377630327019082
+    }
+  ],
+  "id": "domed-chapel",
+  "group": "paper",
+  "variant": "printed-acceptance",
+  "input_sha256": "98f8f9a8c73754282e00e1b3fd19307b09cdd0d3ac0d2403f18c72db4ed9e7bd",
+  "max_displacement_pixels": 0.0
+}

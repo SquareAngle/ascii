@@ -1,0 +1,268 @@
+{
+  "placement_probes": [
+    {
+      "query": "bottom-left corner",
+      "pixel_lines": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            16
+          ]
+        ],
+        [
+          [
+            1,
+            16
+          ],
+          [
+            10,
+            16
+          ]
+        ]
+      ],
+      "paper_match": "L",
+      "top_five": [
+        {
+          "character": "_",
+          "score": 2.0357608150865523
+        },
+        {
+          "character": "E",
+          "score": 2.388801791385894
+        },
+        {
+          "character": "Q",
+          "score": 2.405798263581803
+        },
+        {
+          "character": "p",
+          "score": 2.4294186233320123
+        },
+        {
+          "character": "g",
+          "score": 2.4446827817760832
+        }
+      ]
+    },
+    {
+      "query": "left vertical",
+      "pixel_lines": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            16
+          ]
+        ]
+      ],
+      "paper_match": "}",
+      "top_five": [
+        {
+          "character": "h",
+          "score": 2.7132681763875635
+        },
+        {
+          "character": "P",
+          "score": 2.7279217095622625
+        },
+        {
+          "character": "F",
+          "score": 2.748761721608948
+        },
+        {
+          "character": "D",
+          "score": 2.913545861308448
+        },
+        {
+          "character": "n",
+          "score": 2.932940084629285
+        }
+      ]
+    },
+    {
+      "query": "top line with upward spur",
+      "pixel_lines": [
+        [
+          [
+            1,
+            3
+          ],
+          [
+            10,
+            3
+          ]
+        ],
+        [
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            3
+          ]
+        ]
+      ],
+      "paper_match": "~",
+      "top_five": [
+        {
+          "character": "\"",
+          "score": 1.3909808072028607
+        },
+        {
+          "character": "*",
+          "score": 1.9030878089689565
+        },
+        {
+          "character": "?",
+          "score": 2.461447502634059
+        },
+        {
+          "character": "'",
+          "score": 2.56196389327676
+        },
+        {
+          "character": "^",
+          "score": 2.804044721676663
+        }
+      ]
+    },
+    {
+      "query": "long horizontal above center",
+      "pixel_lines": [
+        [
+          [
+            1,
+            9
+          ],
+          [
+            10,
+            9
+          ]
+        ]
+      ],
+      "paper_match": "-",
+      "top_five": [
+        {
+          "character": "-",
+          "score": 1.7968346374094217
+        },
+        {
+          "character": "~",
+          "score": 2.6395232950843823
+        },
+        {
+          "character": ">",
+          "score": 2.790044787254263
+        },
+        {
+          "character": "=",
+          "score": 2.814043049673239
+        },
+        {
+          "character": "x",
+          "score": 2.9612119972675957
+        }
+      ]
+    },
+    {
+      "query": "long horizontal below center",
+      "pixel_lines": [
+        [
+          [
+            1,
+            11
+          ],
+          [
+            10,
+            11
+          ]
+        ]
+      ],
+      "paper_match": "-",
+      "top_five": [
+        {
+          "character": "=",
+          "score": 2.867163199393682
+        },
+        {
+          "character": "%",
+          "score": 2.9930843854550315
+        },
+        {
+          "character": "w",
+          "score": 3.0055903825158135
+        },
+        {
+          "character": "D",
+          "score": 3.033733175688572
+        },
+        {
+          "character": "X",
+          "score": 3.0493387147574924
+        }
+      ]
+    }
+  ],
+  "initial_moves": [
+    {
+      "input": "inputs/diagnostics/kite.json",
+      "columns": 17,
+      "rays": 32,
+      "vertices": 29,
+      "links": 263,
+      "minimum_link_length": 5.706521739130437,
+      "valid_moves": 36226,
+      "bounds_valid_moves": 36227,
+      "total_moves": 36424,
+      "best_delta": -0.012819650565721208,
+      "strict_improvements": 11
+    },
+    {
+      "input": "inputs/diagnostics/kite.json",
+      "columns": 17,
+      "rays": 0,
+      "vertices": 29,
+      "links": 0,
+      "minimum_link_length": null,
+      "valid_moves": 36227,
+      "bounds_valid_moves": 36227,
+      "total_moves": 36424,
+      "best_delta": -0.029272819150302887,
+      "strict_improvements": 42
+    },
+    {
+      "input": "inputs/paper/domed-chapel.json",
+      "columns": 22,
+      "rays": 32,
+      "vertices": 74,
+      "links": 1086,
+      "minimum_link_length": 0.6310096153846416,
+      "valid_moves": 92574,
+      "bounds_valid_moves": 92574,
+      "total_moves": 92944,
+      "best_delta": -0.029189378464628213,
+      "strict_improvements": 30
+    },
+    {
+      "input": "inputs/paper/domed-chapel.json",
+      "columns": 22,
+      "rays": 0,
+      "vertices": 74,
+      "links": 0,
+      "minimum_link_length": null,
+      "valid_moves": 92574,
+      "bounds_valid_moves": 92574,
+      "total_moves": 92944,
+      "best_delta": -0.031451206556208255,
+      "strict_improvements": 103
+    }
+  ]
+}

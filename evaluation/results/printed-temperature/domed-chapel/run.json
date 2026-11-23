@@ -1,0 +1,356 @@
+{
+  "config": {
+    "columns": 22,
+    "seed": 0,
+    "patience": 5000,
+    "max_proposals": null,
+    "padding": 2.0,
+    "max_segment_length": 24.0,
+    "gaussian_sigma": 1.4,
+    "accessibility_rays": 32,
+    "relative_length": "unit_identity",
+    "accessibility_weights": "inverse_distance",
+    "temperature": "printed",
+    "proposal": "lattice",
+    "acceptance": "metropolis",
+    "font": {
+      "path": "LiberationMono-Regular.ttf",
+      "cell_width": 12,
+      "cell_height": 20,
+      "size": 20,
+      "baseline": 15,
+      "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+      "sha256": "f2b83c763e8afd21709333370bed4774337fae82267937e2b5aea7e2fbd922c1"
+    },
+    "raster": {
+      "threshold": 128,
+      "polarity": "auto",
+      "simplify": 1.0
+    }
+  },
+  "columns": 22,
+  "rows": 9,
+  "vertices": 74,
+  "segments": 72,
+  "initial_score": 1.9377630327019082,
+  "final_score": 1.9377630327019082,
+  "iterations": 5000,
+  "accepted": 3676,
+  "best_iteration": 0,
+  "stopping_reason": "patience",
+  "runtime_seconds": 4.3748388750245795,
+  "optimization_seconds": 4.251187541987747,
+  "history": [
+    {
+      "iteration": 0,
+      "accepted": 0,
+      "current": 1.9377630327019082,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 100,
+      "accepted": 56,
+      "current": 42.39268569336806,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 200,
+      "accepted": 127,
+      "current": 177.80444368849467,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 300,
+      "accepted": 205,
+      "current": 260.735957329563,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 400,
+      "accepted": 284,
+      "current": 531.0758864556208,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 500,
+      "accepted": 353,
+      "current": 814.4902931161049,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 600,
+      "accepted": 424,
+      "current": 1121.7152661686648,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 700,
+      "accepted": 496,
+      "current": 1328.2401481226918,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 800,
+      "accepted": 573,
+      "current": 1468.2574707262447,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 900,
+      "accepted": 648,
+      "current": 1357.8015829551473,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1000,
+      "accepted": 724,
+      "current": 1891.0099001629615,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1100,
+      "accepted": 788,
+      "current": 1705.7858690471417,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1200,
+      "accepted": 852,
+      "current": 2260.6179477608785,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1300,
+      "accepted": 923,
+      "current": 2431.1477646098742,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1400,
+      "accepted": 994,
+      "current": 3171.945599489936,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1500,
+      "accepted": 1057,
+      "current": 4222.60925213528,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1600,
+      "accepted": 1123,
+      "current": 3779.7202634144924,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1700,
+      "accepted": 1190,
+      "current": 2747.15754526462,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1800,
+      "accepted": 1265,
+      "current": 2908.198593521248,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1900,
+      "accepted": 1340,
+      "current": 3353.236359836685,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2000,
+      "accepted": 1409,
+      "current": 3588.624026780565,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2100,
+      "accepted": 1484,
+      "current": 3114.0900208106946,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2200,
+      "accepted": 1559,
+      "current": 3688.707762740509,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2300,
+      "accepted": 1635,
+      "current": 3836.832306680429,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2400,
+      "accepted": 1708,
+      "current": 4606.382863091645,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2500,
+      "accepted": 1790,
+      "current": 5555.820681600667,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2600,
+      "accepted": 1868,
+      "current": 5551.306020487494,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2700,
+      "accepted": 1945,
+      "current": 4748.655366531043,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2800,
+      "accepted": 2021,
+      "current": 4872.3141113592,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2900,
+      "accepted": 2103,
+      "current": 4151.45312572233,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3000,
+      "accepted": 2183,
+      "current": 6152.300854797865,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3100,
+      "accepted": 2256,
+      "current": 5202.18198385379,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3200,
+      "accepted": 2328,
+      "current": 8273.509614364479,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3300,
+      "accepted": 2400,
+      "current": 9500.158450559717,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3400,
+      "accepted": 2471,
+      "current": 7548.486468458236,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3500,
+      "accepted": 2542,
+      "current": 5840.3848306390355,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3600,
+      "accepted": 2614,
+      "current": 7153.97618969795,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3700,
+      "accepted": 2684,
+      "current": 5878.550736548263,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3800,
+      "accepted": 2763,
+      "current": 6641.8550168202455,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3900,
+      "accepted": 2842,
+      "current": 4683.659178857138,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4000,
+      "accepted": 2922,
+      "current": 5112.130349755391,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4100,
+      "accepted": 3000,
+      "current": 7444.615887154672,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4200,
+      "accepted": 3075,
+      "current": 7019.272980943333,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4300,
+      "accepted": 3155,
+      "current": 9850.685551706882,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4400,
+      "accepted": 3227,
+      "current": 12117.946395194773,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4500,
+      "accepted": 3296,
+      "current": 8351.051871694883,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4600,
+      "accepted": 3368,
+      "current": 5236.163369111606,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4700,
+      "accepted": 3443,
+      "current": 8326.738002750237,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4800,
+      "accepted": 3518,
+      "current": 8657.115390669107,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4900,
+      "accepted": 3600,
+      "current": 5727.3814208847925,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 5000,
+      "accepted": 3676,
+      "current": 6443.9288763298955,
+      "best": 1.9377630327019082
+    }
+  ],
+  "id": "domed-chapel",
+  "group": "paper",
+  "variant": "printed-temperature",
+  "input_sha256": "98f8f9a8c73754282e00e1b3fd19307b09cdd0d3ac0d2403f18c72db4ed9e7bd",
+  "max_displacement_pixels": 0.0
+}

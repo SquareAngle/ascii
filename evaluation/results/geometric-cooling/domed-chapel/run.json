@@ -1,0 +1,356 @@
+{
+  "config": {
+    "columns": 22,
+    "seed": 0,
+    "patience": 5000,
+    "max_proposals": null,
+    "padding": 2.0,
+    "max_segment_length": 24.0,
+    "gaussian_sigma": 1.4,
+    "accessibility_rays": 32,
+    "relative_length": "unit_identity",
+    "accessibility_weights": "inverse_distance",
+    "temperature": "geometric",
+    "proposal": "lattice",
+    "acceptance": "metropolis",
+    "font": {
+      "path": "LiberationMono-Regular.ttf",
+      "cell_width": 12,
+      "cell_height": 20,
+      "size": 20,
+      "baseline": 15,
+      "characters": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+      "sha256": "f2b83c763e8afd21709333370bed4774337fae82267937e2b5aea7e2fbd922c1"
+    },
+    "raster": {
+      "threshold": 128,
+      "polarity": "auto",
+      "simplify": 1.0
+    }
+  },
+  "columns": 22,
+  "rows": 9,
+  "vertices": 74,
+  "segments": 72,
+  "initial_score": 1.9377630327019082,
+  "final_score": 1.9377630327019082,
+  "iterations": 5000,
+  "accepted": 72,
+  "best_iteration": 0,
+  "stopping_reason": "patience",
+  "runtime_seconds": 1.6282465840340592,
+  "optimization_seconds": 1.6279440420330502,
+  "history": [
+    {
+      "iteration": 0,
+      "accepted": 0,
+      "current": 1.9377630327019082,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 100,
+      "accepted": 7,
+      "current": 2.1712391035891,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 200,
+      "accepted": 14,
+      "current": 2.666371926702104,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 300,
+      "accepted": 23,
+      "current": 2.7625456648645663,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 400,
+      "accepted": 29,
+      "current": 2.8689825298686733,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 500,
+      "accepted": 35,
+      "current": 3.3431957769568594,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 600,
+      "accepted": 40,
+      "current": 3.2345654494869556,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 700,
+      "accepted": 41,
+      "current": 3.1573269570915943,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 800,
+      "accepted": 43,
+      "current": 3.1315212459724746,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 900,
+      "accepted": 47,
+      "current": 2.9003157496319303,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1000,
+      "accepted": 48,
+      "current": 2.8848415297837673,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1100,
+      "accepted": 48,
+      "current": 2.8848415297837673,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1200,
+      "accepted": 50,
+      "current": 2.8644035954649096,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1300,
+      "accepted": 51,
+      "current": 2.8508879530371947,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1400,
+      "accepted": 51,
+      "current": 2.8508879530371947,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1500,
+      "accepted": 52,
+      "current": 2.8427395491169127,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1600,
+      "accepted": 52,
+      "current": 2.8427395491169127,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1700,
+      "accepted": 53,
+      "current": 2.8417335208556835,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1800,
+      "accepted": 53,
+      "current": 2.8417335208556835,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 1900,
+      "accepted": 53,
+      "current": 2.8417335208556835,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2000,
+      "accepted": 54,
+      "current": 2.824345101863824,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2100,
+      "accepted": 54,
+      "current": 2.824345101863824,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2200,
+      "accepted": 55,
+      "current": 2.780383683213903,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2300,
+      "accepted": 55,
+      "current": 2.780383683213903,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2400,
+      "accepted": 56,
+      "current": 2.7793178749254643,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2500,
+      "accepted": 56,
+      "current": 2.7793178749254643,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2600,
+      "accepted": 56,
+      "current": 2.7793178749254643,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2700,
+      "accepted": 57,
+      "current": 2.710718228196865,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2800,
+      "accepted": 57,
+      "current": 2.710718228196865,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 2900,
+      "accepted": 58,
+      "current": 2.708560081232884,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3000,
+      "accepted": 59,
+      "current": 2.7069263427210597,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3100,
+      "accepted": 60,
+      "current": 2.6966120154992024,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3200,
+      "accepted": 61,
+      "current": 2.6171290314769613,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3300,
+      "accepted": 62,
+      "current": 2.608879674171151,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3400,
+      "accepted": 62,
+      "current": 2.608879674171151,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3500,
+      "accepted": 62,
+      "current": 2.608879674171151,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3600,
+      "accepted": 66,
+      "current": 2.5123839472711715,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3700,
+      "accepted": 66,
+      "current": 2.5123839472711715,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3800,
+      "accepted": 66,
+      "current": 2.5123839472711715,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 3900,
+      "accepted": 66,
+      "current": 2.5123839472711715,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4000,
+      "accepted": 67,
+      "current": 2.5111006759427466,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4100,
+      "accepted": 67,
+      "current": 2.5111006759427466,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4200,
+      "accepted": 68,
+      "current": 2.5078677531658973,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4300,
+      "accepted": 69,
+      "current": 2.5023655175787165,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4400,
+      "accepted": 69,
+      "current": 2.5023655175787165,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4500,
+      "accepted": 69,
+      "current": 2.5023655175787165,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4600,
+      "accepted": 70,
+      "current": 2.492492055531044,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4700,
+      "accepted": 71,
+      "current": 2.4904316008663034,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4800,
+      "accepted": 71,
+      "current": 2.4904316008663034,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 4900,
+      "accepted": 71,
+      "current": 2.4904316008663034,
+      "best": 1.9377630327019082
+    },
+    {
+      "iteration": 5000,
+      "accepted": 72,
+      "current": 2.4668011681116493,
+      "best": 1.9377630327019082
+    }
+  ],
+  "id": "domed-chapel",
+  "group": "paper",
+  "variant": "geometric-cooling",
+  "input_sha256": "98f8f9a8c73754282e00e1b3fd19307b09cdd0d3ac0d2403f18c72db4ed9e7bd",
+  "max_displacement_pixels": 0.0
+}

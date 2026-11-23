@@ -1,0 +1,15 @@
+{
+  "group": "source",
+  "id": "paper-queen",
+  "sample_id": "queen.3.gif",
+  "input": "local-references/queen.3.gif",
+  "source": "https://ttwong12.github.io/papers/asciiart/queen/queen.3.gif",
+  "sha256": "37e6c68d995dd1f5b452446d749c53b5a75fc286e4b6637afefd28134a43812f",
+  "category": "portrait",
+  "notes": "Author's raster input for Figure 12. Their published example used Shift-JIS.",
+  "license": "No standalone reuse license found.",
+  "original_caption": null,
+  "original_prompt": null,
+  "generated_description": null,
+  "preprocessing": "Threshold, thin, trace and simplify before fitting."
+}
