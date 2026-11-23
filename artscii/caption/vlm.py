@@ -78,7 +78,11 @@ Rules:
 "drawing of" or "line art".
 - Ignore artist signatures or initials (e.g. "jgs", "hjw", "-Row") and stray text, unless \
 the lettering itself is the subject.
-- Mention pose, orientation (e.g. facing left) and distinctive parts only when visible.
+- Never use left/right directions ("facing left", "on the right"): pictures are mirrored \
+during training, which would make them wrong. Up/down, front/side view are fine.
+- Mention pose and distinctive parts only when visible.
+- If it is a fragment of a larger picture, describe what is visible; if it holds several \
+separate drawings, say so (e.g. "two cats and a house").
 - Do not guess beyond what is drawn. If you cannot tell what it depicts, answer \
 {{"unclear": true}}.
 
@@ -90,6 +94,9 @@ Answer with JSON only, no other text:
 
 def hints(piece: dict) -> str:
     title = (piece.get("title") or "").strip()
+    if piece.get("source") == "asciiart_eu_usenet":  # category is just the newsgroup name
+        return (f'posted in a newsgroup thread titled "{title}" (thread titles are often '
+                "off-topic, and one thread holds many drawings)") if title else "none"
     parts = [f'category "{piece["category"]}"'] if piece.get("category") else []
     if title and title.lower() not in piece.get("category", "").lower():
         parts.append(f'title "{title}"')

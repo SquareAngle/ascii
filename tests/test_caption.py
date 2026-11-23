@@ -35,6 +35,9 @@ def test_messages_carry_hints():
     text = msgs[0]["content"][1]["text"]
     assert 'category "animals/cats"' in text and 'title "Tabby"' in text
     assert "{" in text and "unclear" in text  # literal JSON braces survived .format
+    usenet = build_messages({"source": "asciiart_eu_usenet", "category": "usenet > alt.ascii-art",
+                             "title": "Re: newbie question"}, "AAAA")[0]["content"][1]["text"]
+    assert "Re: newbie question" in usenet and "alt.ascii-art" not in usenet
     redundant = build_messages({"category": "animals/cats", "title": "cats"}, "AAAA")
     assert "title" not in redundant[0]["content"][1]["text"].split("Rules:")[0].split("Hints")[1]
 

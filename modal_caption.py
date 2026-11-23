@@ -8,7 +8,7 @@ upload) and writes captions/<out>.jsonl there, one row per piece:
 `key` is artscii.caption.vlm.piece_key(art), the same hash clean.py deduplicates on.
 
 Pilot: a sample spread evenly over the four sources, plus an HTML review page:
-    modal run modal_caption.py --limit 200
+    modal run modal_caption.py --limit 20
     modal volume get artscii captions/pilot.html .
 
 Full run (resumes: pieces already in the output file are skipped):
@@ -120,7 +120,7 @@ def caption(limit: int, out: str, model: str, max_h: int, max_w: int, seed: int,
 
 
 @app.local_entrypoint()
-def main(limit: int = 200, out: str = "", model: str = MODEL, max_h: int = 32,
+def main(limit: int = 20, out: str = "", model: str = MODEL, max_h: int = 32,
          max_w: int = 64, seed: int = 0):
     out = out or ("pilot" if limit > 0 else "captions")
     print(caption.remote(limit, out, model, max_h, max_w, seed))

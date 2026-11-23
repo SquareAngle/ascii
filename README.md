@@ -9,5 +9,5 @@ modal volume put artscii ~/artscii_data/processed /processed
 modal run --detach modal_train.py --overrides "name=uncond_small_modal"
 modal run modal_eval.py --runs uncond_small_modal
 modal volume get artscii runs/uncond_small_modal ./runs/
-modal run modal_caption.py --limit 200   # caption pilot -> captions/pilot.html
+modal run modal_caption.py --limit 20   # caption pilot -> captions/pilot.html
 ```
