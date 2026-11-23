@@ -1,13 +1,15 @@
 """Caption pieces with Claude (vision) instead of a local VLM, for comparison with
 modal_caption.py. Same render, prompt, parser and output rows; runs locally.
 
-Needs ANTHROPIC_API_KEY. Caption the exact pieces of an earlier pilot:
+Needs an API key in ARTSCII_ANTHROPIC_API_KEY (or ANTHROPIC_API_KEY, which Claude Code
+cloud environments reserve for their own login). Caption the exact pieces of an earlier pilot:
     python claude_caption.py --data-dir <dir with train/val.jsonl> \\
         --keys captions/pilot.jsonl --out claude_pilot
 Writes <out>.jsonl and <out>.html (same review page as the Modal pilot).
 """
 import argparse
 import json
+import os
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -66,7 +68,8 @@ def main():
     pieces = [found[k] for k in order if k in found]
     print(f"{len(pieces)}/{len(order)} pieces found", flush=True)
 
-    client = anthropic.Anthropic()
+    key = os.environ.get("ARTSCII_ANTHROPIC_API_KEY")
+    client = anthropic.Anthropic(api_key=key) if key else anthropic.Anthropic()
     t0 = time.time()
     with ThreadPoolExecutor(args.workers) as ex:
         results = list(ex.map(lambda p: caption_one(client, p, args.model, args.effort), pieces))
