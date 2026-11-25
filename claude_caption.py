@@ -25,21 +25,27 @@ from artscii.caption.vlm import (PROMPT, hints, parse_response, piece_key, png_b
 MODEL = "claude-opus-5-5"
 
 
-def _with_confidence(prompt):
-    """The shared prompt plus a confidence rule and field. Both go inside the rules and the
-    JSON template: appended after the template, the model often wrote the JSON and then a
-    second object or a note, or left the field out."""
-    rule = ('- Rate your confidence that the captions are right as a number from 0 to 1: '
-            'about 0.9 or more if you are sure what the picture shows, about 0.5 to 0.8 if '
-            'the subject is clear but a detail or the exact identity is a guess, below 0.5 if '
-            'the whole subject is a plausible guess.\n\nAnswer with JSON only')
-    field = 'composition>",\n  "confidence": <number from 0 to 1>}}'
-    assert prompt.count("\n\nAnswer with JSON only") == 1 and prompt.endswith('composition>"}}')
-    return prompt.replace("\n\nAnswer with JSON only", "\n" + rule).removesuffix(
-        'composition>"}}') + field
+def _claude_prompt(prompt):
+    """The shared (Qwen) prompt with Claude-only changes: a natural-wording rule, a shorter
+    long caption, and a confidence rule and field. The changes go inside the rules and the
+    JSON template: a confidence request appended after the template made the model write the
+    JSON and then a second object or a note, or leave the field out."""
+    rules = (
+        "- Write like a person describing the picture in plain everyday words, not a catalog "
+        "of parts: pick the few details that matter most and let the sentences flow.\n"
+        "- Rate your confidence that the captions are right as a number from 0 to 1: about "
+        "0.9 or more if you are sure what the picture shows, about 0.5 to 0.8 if the subject "
+        "is clear but a detail or the exact identity is a guess, below 0.5 if the whole "
+        "subject is a plausible guess.\n\nAnswer with JSON only")
+    old_long = '"long": "<one or two sentences: subject, pose, key details and composition>"}}'
+    new_long = ('"long": "<one or two sentences, at most 30 words: the subject, what it is '
+                'doing and the details that stand out>",\n  "confidence": <number from 0 to 1>}}')
+    assert prompt.count("\n\nAnswer with JSON only") == 1 and prompt.endswith(old_long)
+    return prompt.replace("\n\nAnswer with JSON only", "\n" + rules).removesuffix(
+        old_long) + new_long
 
 
-CLAUDE_PROMPT = _with_confidence(PROMPT)
+CLAUDE_PROMPT = _claude_prompt(PROMPT)
 
 
 def caption_one(client, piece, model, effort):
