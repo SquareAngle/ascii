@@ -31,8 +31,12 @@ def _claude_prompt(prompt):
     JSON template: a confidence request appended after the template made the model write the
     JSON and then a second object or a note, or leave the field out."""
     rules = (
-        "- Write like a person describing the picture in plain everyday words, not a catalog "
-        "of parts: pick the few details that matter most and let the sentences flow.\n"
+        "- Write like a person describing the picture in plain everyday words. Name the "
+        "subject and at most two or three details that stand out, not every part.\n"
+        "- Describe only what is in the picture: no comparisons to anything outside it (a "
+        "story, film or famous scene) and no hedges such as \"likely\", \"possibly\" or "
+        "\"appears to be\". Put any doubt in the confidence number, never in the captions.\n"
+        "- Also avoid the words \"drawn\" and \"dotted\".\n"
         "- Rate your confidence that the captions are right as a number from 0 to 1: about "
         "0.9 or more if you are sure what the picture shows, about 0.5 to 0.8 if the subject "
         "is clear but a detail or the exact identity is a guess, below 0.5 if the whole "
