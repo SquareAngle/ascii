@@ -22,7 +22,6 @@ from PIL import Image, ImageDraw, ImageFont
 FONT_PATHS = ["/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
               "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf"]
 LEVELS = ("short", "medium", "long")
-CONFIDENCE = ("high", "medium", "low")
 
 
 def piece_key(art: str) -> str:
@@ -114,7 +113,7 @@ def build_messages(piece: dict, img_b64: str) -> list[dict]:
 
 def parse_response(text: str) -> dict | None:
     """{"short", "medium", "long"} or {"unclear": True}; None if the output is unusable.
-    An optional "confidence" (high/medium/low) is kept when the prompt asked for one."""
+    An optional "confidence" (a number from 0 to 1) is kept when the prompt asked for one."""
     m = re.search(r"\{.*\}", text, re.S)  # tolerate ```json fences and chatter
     if not m:
         return None
@@ -131,8 +130,8 @@ def parse_response(text: str) -> dict | None:
         return None
     out = {k: " ".join(v.split()) for k, v in caps.items()}
     conf = obj.get("confidence")
-    if isinstance(conf, str) and conf.strip().lower() in CONFIDENCE:
-        out["confidence"] = conf.strip().lower()
+    if isinstance(conf, (int, float)) and not isinstance(conf, bool) and 0 <= conf <= 1:
+        out["confidence"] = float(conf)
     return out
 
 
@@ -162,7 +161,7 @@ def write_report(path, rows: list[dict]):
             body = "".join(f"<p><span class='k'>{k}</span><br>{html.escape(r[k])}</p>"
                            for k in LEVELS)
             if r.get("confidence"):
-                body += f"<p class='k'>confidence: {html.escape(r['confidence'])}</p>"
+                body += f"<p class='k'>confidence: {r['confidence']:.2f}</p>"
         parts.append(
             f"<div class='card'><img src='data:image/png;base64,{r['png']}' alt=''>"
             f"<div class='meta'><p class='k'>{html.escape(r['source'])} · "

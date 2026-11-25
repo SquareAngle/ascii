@@ -7,7 +7,7 @@ cloud environments reserve for their own login). Caption the exact pieces of an 
         --keys captions/pilot.jsonl --out claude_pilot
 Writes <out>.jsonl and <out>.html (same review page as the Modal pilot).
 
-Differences from the Qwen rows: captioned rows add "confidence" (high/medium/low), and
+Differences from the Qwen rows: captioned rows add "confidence" (0 to 1), and
 unclear or unparseable rows add "reasoning", the model's summarized reasoning.
 """
 import argparse
@@ -29,10 +29,11 @@ def _with_confidence(prompt):
     """The shared prompt plus a confidence rule and field. Both go inside the rules and the
     JSON template: appended after the template, the model often wrote the JSON and then a
     second object or a note, or left the field out."""
-    rule = ('- Rate your confidence: "high" if you are sure what the picture shows, "medium" '
-            'if the subject is clear but a detail or the exact identity is a guess, "low" if '
+    rule = ('- Rate your confidence that the captions are right as a number from 0 to 1: '
+            'about 0.9 or more if you are sure what the picture shows, about 0.5 to 0.8 if '
+            'the subject is clear but a detail or the exact identity is a guess, below 0.5 if '
             'the whole subject is a plausible guess.\n\nAnswer with JSON only')
-    field = 'composition>",\n  "confidence": "<high, medium or low>"}}'
+    field = 'composition>",\n  "confidence": <number from 0 to 1>}}'
     assert prompt.count("\n\nAnswer with JSON only") == 1 and prompt.endswith('composition>"}}')
     return prompt.replace("\n\nAnswer with JSON only", "\n" + rule).removesuffix(
         'composition>"}}') + field
@@ -100,14 +101,16 @@ def main():
     dt = time.time() - t0
 
     counts = {"captioned": 0, "unclear": 0, "failed": 0}
-    conf = {"high": 0, "medium": 0, "low": 0, "missing": 0}
+    conf = {">=0.9": 0, "0.5-0.9": 0, "<0.5": 0, "missing": 0}
     tok_in = tok_out = 0
     with open(f"{args.out}.jsonl", "w") as fh:
         for row, _, u in results:
             counts["failed" if row.get("failed") else "unclear" if row.get("unclear")
                    else "captioned"] += 1
             if not row.get("failed") and not row.get("unclear"):
-                conf[row.get("confidence", "missing")] += 1
+                c = row.get("confidence")
+                conf["missing" if c is None else ">=0.9" if c >= 0.9 else "0.5-0.9"
+                     if c >= 0.5 else "<0.5"] += 1
             tok_in += u["input"]
             tok_out += u["output"]
             fh.write(json.dumps(row) + "\n")

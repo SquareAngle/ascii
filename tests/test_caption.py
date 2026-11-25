@@ -25,9 +25,10 @@ def test_parse_response():
     good = '```json\n{"short": "a cat", "medium": "a cat face", "long": "a  cat\\nface."}\n```'
     assert parse_response(good) == {"short": "a cat", "medium": "a cat face", "long": "a cat face."}
     assert parse_response('{"unclear": true}') == {"unclear": True}
-    conf = '{"short": "a", "medium": "b", "long": "c", "confidence": "Low"}'
-    assert parse_response(conf)["confidence"] == "low"
-    assert "confidence" not in parse_response(conf.replace("Low", "maybe"))
+    conf = '{"short": "a", "medium": "b", "long": "c", "confidence": 0.35}'
+    assert parse_response(conf)["confidence"] == 0.35
+    for bad in ("1.5", "-0.1", '"high"', "true"):
+        assert "confidence" not in parse_response(conf.replace("0.35", bad))
     assert parse_response('{"short": "a cat", "medium": ""}') is None
     assert parse_response("I think this is a cat") is None
     assert parse_response("[1, 2]") is None
