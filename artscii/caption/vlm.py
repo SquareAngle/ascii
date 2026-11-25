@@ -22,6 +22,7 @@ from PIL import Image, ImageDraw, ImageFont
 FONT_PATHS = ["/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
               "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf"]
 LEVELS = ("short", "medium", "long")
+CONFIDENCE = ("high", "medium", "low")
 
 
 def piece_key(art: str) -> str:
@@ -112,7 +113,8 @@ def build_messages(piece: dict, img_b64: str) -> list[dict]:
 
 
 def parse_response(text: str) -> dict | None:
-    """{"short", "medium", "long"} or {"unclear": True}; None if the output is unusable."""
+    """{"short", "medium", "long"} or {"unclear": True}; None if the output is unusable.
+    An optional "confidence" (high/medium/low) is kept when the prompt asked for one."""
     m = re.search(r"\{.*\}", text, re.S)  # tolerate ```json fences and chatter
     if not m:
         return None
@@ -127,7 +129,11 @@ def parse_response(text: str) -> dict | None:
     caps = {k: obj.get(k) for k in LEVELS}
     if not all(isinstance(v, str) and v.strip() for v in caps.values()):
         return None
-    return {k: " ".join(v.split()) for k, v in caps.items()}
+    out = {k: " ".join(v.split()) for k, v in caps.items()}
+    conf = obj.get("confidence")
+    if isinstance(conf, str) and conf.strip().lower() in CONFIDENCE:
+        out["confidence"] = conf.strip().lower()
+    return out
 
 
 def write_report(path, rows: list[dict]):
@@ -150,9 +156,13 @@ def write_report(path, rows: list[dict]):
             body = f"<p class='bad'>unparseable output:</p><pre>{html.escape(r.get('raw', ''))}</pre>"
         elif r.get("unclear"):
             body = "<p class='bad'>unclear</p>"
+            if r.get("reasoning"):
+                body += f"<p><span class='k'>reasoning</span><br>{html.escape(r['reasoning'])}</p>"
         else:
             body = "".join(f"<p><span class='k'>{k}</span><br>{html.escape(r[k])}</p>"
                            for k in LEVELS)
+            if r.get("confidence"):
+                body += f"<p class='k'>confidence: {html.escape(r['confidence'])}</p>"
         parts.append(
             f"<div class='card'><img src='data:image/png;base64,{r['png']}' alt=''>"
             f"<div class='meta'><p class='k'>{html.escape(r['source'])} · "
