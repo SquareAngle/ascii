@@ -52,33 +52,63 @@ def _claude_prompt(prompt):
 CLAUDE_PROMPT = _claude_prompt(PROMPT)
 
 
-def caption_one(client, piece, model, effort):
-    b64 = png_b64(render_png(piece["art"]))
-    resp = client.beta.messages.create(
+def request_params(piece, b64, model, effort):
+    """Messages API parameters for one piece (shared with the Batch API in claude_batch.py)."""
+    return dict(
         model=model,
         max_tokens=16000,
         thinking={"type": "adaptive", "display": "summarized"},  # summary kept for unclear rows
         output_config={"effort": effort},
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",  # re-run on another model if this one declines
         messages=[{"role": "user", "content": [
             {"type": "image", "source": {"type": "base64", "media_type": "image/png",
                                          "data": b64}},
             {"type": "text", "text": CLAUDE_PROMPT.format(hints=hints(piece))},
         ]}],
     )
-    raw = "".join(b.text for b in resp.content if b.type == "text")
-    reasoning = " ".join(" ".join(b.thinking.split()) for b in resp.content
+
+
+def make_row(piece, msg):
+    """Output row for one piece from a Message: captions, unclear or failed."""
+    raw = "".join(b.text for b in msg.content if b.type == "text")
+    reasoning = " ".join(" ".join(b.thinking.split()) for b in msg.content
                          if b.type == "thinking" and b.thinking)
-    parsed = parse_response(raw) if resp.stop_reason != "refusal" else None
+    parsed = parse_response(raw) if msg.stop_reason != "refusal" else None
     row = dict(key=piece_key(piece["art"]), source=piece["source"],
                category=piece["category"], title=piece["title"], split=piece["split"],
                h=piece["h"], w=piece["w"])
-    row.update(parsed if parsed else dict(failed=True, raw=raw or f"[{resp.stop_reason}]"))
+    row.update(parsed if parsed else dict(failed=True, raw=raw or f"[{msg.stop_reason}]"))
     if (not parsed or parsed.get("unclear")) and reasoning:
         row["reasoning"] = reasoning
+    return row
+
+
+def caption_one(client, piece, model, effort):
+    b64 = png_b64(render_png(piece["art"]))
+    resp = client.beta.messages.create(
+        **request_params(piece, b64, model, effort),
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",  # re-run on another model if this one declines
+    )
     usage = dict(input=resp.usage.input_tokens, output=resp.usage.output_tokens)
-    return row, b64, usage
+    return make_row(piece, resp), b64, usage
+
+
+def load_pieces(data_dir, keys=None):
+    """Pieces from train.jsonl and val.jsonl, in file order, or in `keys` order if given."""
+    wanted = set(keys) if keys is not None else None
+    found = {}
+    for split in ("train", "val"):
+        for line in open(Path(data_dir) / f"{split}.jsonl"):
+            p = json.loads(line)
+            k = piece_key(p["art"])
+            if wanted is None or k in wanted:
+                found[k] = p
+    return [found[k] for k in keys if k in found] if keys is not None else list(found.values())
+
+
+def make_client():
+    key = os.environ.get("ARTSCII_ANTHROPIC_API_KEY")
+    return anthropic.Anthropic(api_key=key) if key else anthropic.Anthropic()
 
 
 def main():
@@ -92,19 +122,10 @@ def main():
     args = ap.parse_args()
 
     order = [json.loads(l)["key"] for l in open(args.keys)]
-    wanted = set(order)
-    found = {}
-    for split in ("train", "val"):
-        for line in open(Path(args.data_dir) / f"{split}.jsonl"):
-            p = json.loads(line)
-            k = piece_key(p["art"])
-            if k in wanted:
-                found[k] = p
-    pieces = [found[k] for k in order if k in found]
+    pieces = load_pieces(args.data_dir, order)
     print(f"{len(pieces)}/{len(order)} pieces found", flush=True)
 
-    key = os.environ.get("ARTSCII_ANTHROPIC_API_KEY")
-    client = anthropic.Anthropic(api_key=key) if key else anthropic.Anthropic()
+    client = make_client()
     t0 = time.time()
     with ThreadPoolExecutor(args.workers) as ex:
         results = list(ex.map(lambda p: caption_one(client, p, args.model, args.effort), pieces))
