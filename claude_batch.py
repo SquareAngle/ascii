@@ -158,7 +158,7 @@ def collect(args):
         tmp.write_text("".join(json.dumps(r) + "\n" for r in rows.values()))
         tmp.replace(args.out)
         for b in state["batches"]:
-            b["retry"] = [k for k in b.get("retry", []) if rows.get(k, {}).get("failed", True)]
+            b["retry"] = [k for k in b.get("retry", []) if k not in rows or rows[k].get("failed")]
         save_state(args.state, state)
     summarize(args.out, state)
 
