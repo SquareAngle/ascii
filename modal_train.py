@@ -2,7 +2,7 @@
 
 One-time setup (laptop or cluster login node):
     pip install modal && modal setup
-    modal volume put artscii ~/artscii_data/processed /processed
+    modal volume put ascii ~/artscii_data/processed /processed
 
 Train (same overrides as `python -m artscii.train --set ...`, comma-separated):
     modal run --detach modal_train.py --overrides "name=uncond_small_modal"
@@ -12,8 +12,8 @@ Scaling sweep, one GPU per size in parallel (the cluster ran them one after anot
     modal run --detach modal_train.py --sizes tiny,small,base,large
 
 Fetch results (log.jsonl, samples, config; checkpoints live under ckpt/<name>/):
-    modal volume get artscii runs/<name> ./runs/
-    modal volume get artscii ckpt/<name>/ckpt.pt ./runs/<name>/
+    modal volume get ascii runs/<name> ./runs/
+    modal volume get ascii ckpt/<name>/ckpt.pt ./runs/<name>/
 
 Live curves on Weights & Biases: create a Modal secret holding your W&B key once,
     modal secret create wandb WANDB_API_KEY=<key from wandb.ai/authorize>
@@ -31,7 +31,7 @@ import modal
 GPU = "A100-80GB"
 
 app = modal.App("artscii-train")
-VOLUME = os.environ.get("ARTSCII_VOLUME", "artscii")  # dataset, captions, runs
+VOLUME = os.environ.get("ARTSCII_VOLUME", "ascii")  # dataset, captions, runs
 vol = modal.Volume.from_name(VOLUME, create_if_missing=True)
 hf_vol = modal.Volume.from_name("hf-cache", create_if_missing=True)  # text encoder weights
 image = (

@@ -10,7 +10,7 @@ written next to the run on the volume (runs/<name>/eval_*.json, sample_*.txt).
     modal run modal_eval.py --runs cond_small --prompts "a cat;a sailboat" --guidance 2
         # conditional runs: also sample each prompt (artscii.eval itself measures the
         # unconditional / null-condition samples)
-    modal volume get artscii runs/<name> ./runs/
+    modal volume get ascii runs/<name> ./runs/
 
 Only runs trained through modal_train.py work: eval reads data_dir from the
 checkpoint's config, which must point at the volume (/vol/processed).
@@ -22,7 +22,7 @@ import modal
 GPU = "A10G"  # sampling only; 24 GB is plenty for every preset up to large
 
 app = modal.App("artscii-eval")
-VOLUME = os.environ.get("ARTSCII_VOLUME", "artscii")  # dataset, captions, runs
+VOLUME = os.environ.get("ARTSCII_VOLUME", "ascii")  # dataset, captions, runs
 vol = modal.Volume.from_name(VOLUME, create_if_missing=True)
 hf_vol = modal.Volume.from_name("hf-cache", create_if_missing=True)  # text encoder weights
 image = (

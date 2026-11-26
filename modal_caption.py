@@ -1,6 +1,6 @@
 """Caption the cleaned dataset with a VLM on Modal (vLLM + Qwen3-VL by default).
 
-Reads processed/{train,val}.jsonl from the `artscii` volume (see modal_train.py for the
+Reads processed/{train,val}.jsonl from the `ascii` volume (see modal_train.py for the
 upload) and writes captions/<out>.jsonl there, one row per piece:
     {key, source, category, title, split, h, w, short, medium, long}  (captioned)
     {..., unclear: true}                                               (VLM couldn't tell)
@@ -9,7 +9,7 @@ upload) and writes captions/<out>.jsonl there, one row per piece:
 
 Pilot: a sample spread evenly over the four sources, plus an HTML review page:
     modal run modal_caption.py --limit 20
-    modal volume get artscii captions/pilot.html .
+    modal volume get ascii captions/pilot.html .
 
 Full run (resumes: pieces already in the output file are skipped):
     modal run --detach modal_caption.py --limit 0 --out captions
@@ -25,7 +25,7 @@ MODEL = "Qwen/Qwen3-VL-8B-Instruct"
 GPU = "L40S"  # 48 GB: the 8B model in bf16 plus a large KV cache for batching
 
 app = modal.App("artscii-caption")
-VOLUME = os.environ.get("ARTSCII_VOLUME", "artscii")  # dataset + captions volume
+VOLUME = os.environ.get("ARTSCII_VOLUME", "ascii")  # dataset + captions volume
 data_vol = modal.Volume.from_name(VOLUME, create_if_missing=True)
 hf_vol = modal.Volume.from_name("hf-cache", create_if_missing=True)  # model weights
 image = (
