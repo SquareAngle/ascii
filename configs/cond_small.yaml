@@ -16,3 +16,4 @@ sample_temperature: 1.0
 captions: /vol/captions/captions.jsonl
 cond_drop: 0.1
 guidance: 2.0
+wandb_project: artscii

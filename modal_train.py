@@ -15,6 +15,11 @@ Fetch results (log.jsonl, samples, config; checkpoints live under ckpt/<name>/):
     modal volume get artscii runs/<name> ./runs/
     modal volume get artscii ckpt/<name>/ckpt.pt ./runs/<name>/
 
+Live curves on Weights & Biases: create a Modal secret holding your W&B key once,
+    modal secret create wandb WANDB_API_KEY=<key from wandb.ai/authorize>
+and runs log to the W&B project named by `wandb_project` (set in the configs). Without
+the secret, training runs exactly as before. ARTSCII_WANDB_SECRET picks another secret name.
+
 Every run passes resume=true, so re-running the same command (after a failure or the
 24 h function limit) continues from the last ckpt.pt, which train.py writes every
 `sample_every` steps.
@@ -32,11 +37,23 @@ hf_vol = modal.Volume.from_name("hf-cache", create_if_missing=True)  # text enco
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install("torch==2.7.1", "numpy", "pyyaml", "tqdm", "matplotlib", "pillow",
-                 "transformers==4.57.1", "sentencepiece")
+                 "transformers==4.57.1", "sentencepiece", "wandb==0.22.3")
     .env({"HF_HOME": "/hf"})
     .add_local_python_source("artscii")
     .add_local_dir("configs", "/root/configs")
 )
+
+
+
+def _wandb_secrets():
+    """The W&B key secret if it exists, else nothing (W&B logging then stays off)."""
+    secret = modal.Secret.from_name(os.environ.get("ARTSCII_WANDB_SECRET", "wandb"))
+    try:
+        secret.hydrate()
+    except modal.exception.NotFoundError:
+        return []
+    return [secret]
+
 
 # Redirect the cluster paths (/scratch/...) onto the volume, mounted at /vol.
 VOLUME_PATHS = ["data_dir=/vol/processed", "ckpt_root=/vol/ckpt", "out_root=/vol/runs",
@@ -44,7 +61,7 @@ VOLUME_PATHS = ["data_dir=/vol/processed", "ckpt_root=/vol/ckpt", "out_root=/vol
 
 
 @app.function(image=image, gpu=GPU, volumes={"/vol": vol, "/hf": hf_vol}, timeout=24 * 3600,
-              retries=2, cpu=8, memory=32768)
+              retries=2, cpu=8, memory=32768, secrets=_wandb_secrets())
 def train(config: str, overrides: list[str]):
     import os
 

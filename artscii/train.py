@@ -12,8 +12,10 @@ Writes to runs/<name>/ (shared home, readable from the login node): config.yaml,
 log.jsonl, samples_<step>.txt, and ckpt.pt -> a symlink to the checkpoint on /scratch.
 """
 import argparse
+import html
 import json
 import math
+import os
 import time
 from dataclasses import asdict, dataclass, fields
 from pathlib import Path
@@ -72,6 +74,9 @@ class Config:
     text_max_len: int = 64
     cond_drop: float = 0.1  # fraction of captions replaced by the null condition (for CFG)
     guidance: float = 2.0  # CFG strength for the samples written during training
+    # Weights & Biases (live curves); off when wandb_project is empty or WANDB_API_KEY unset
+    wandb_project: str = ""
+    wandb_entity: str = ""  # team or user; empty = the key's default entity
 
 
 def parse_value(typ, v: str):
@@ -182,6 +187,7 @@ def main(cfg: Config):
         with torch.no_grad():
             sample_cond = encoder(SAMPLE_PROMPTS)
 
+    wb = init_wandb(cfg, run, model)
     log = open(run / "log.jsonl", "a")
     t0 = time.time()
     while step < cfg.max_steps:
@@ -211,6 +217,8 @@ def main(cfg: Config):
                 log.write(json.dumps(rec) + "\n")
                 log.flush()
                 print(rec, flush=True)
+                if wb:
+                    wb.log({k: v for k, v in rec.items() if k != "step"}, step=step)
             if step % cfg.sample_every == 0 or step == cfg.max_steps:
                 ema.module.eval()
                 grids = sample(ema.module, len(SAMPLE_PROMPTS) if sample_cond else 16, H * W,
@@ -220,11 +228,34 @@ def main(cfg: Config):
                           if sample_cond else [""] * len(grids))
                 text = "\n\n".join(l + render(g, H, W) for l, g in zip(labels, grids))
                 (run / f"samples_{step:06d}.txt").write_text(text)
+                if wb:
+                    import wandb
+                    wb.log({"samples": wandb.Html(f"<pre>{html.escape(text)}</pre>")}, step=step)
                 torch.save(dict(model=model.state_dict(), ema=ema.module.state_dict(),
                                 opt=opt.state_dict(), step=step, config=asdict(cfg), d_text=d_text),
                            ckpt_path)
             if step >= cfg.max_steps:
                 break
+    if wb:
+        wb.finish()
+
+
+def init_wandb(cfg, run, model):
+    """Start (or resume) this run's W&B run, or return None when logging is off. The W&B run
+    id is kept in runs/<name>/wandb_id, so a resumed training run continues the same curves."""
+    if not cfg.wandb_project:
+        return None
+    if not os.environ.get("WANDB_API_KEY"):
+        print("wandb_project is set but WANDB_API_KEY is not; not logging to W&B", flush=True)
+        return None
+    import wandb
+
+    id_file = run / "wandb_id"
+    run_id = id_file.read_text().strip() if id_file.exists() else wandb.util.generate_id()
+    id_file.write_text(run_id)
+    return wandb.init(project=cfg.wandb_project, entity=cfg.wandb_entity or None,
+                      name=cfg.name, id=run_id, resume="allow",
+                      config=dict(asdict(cfg), params=model.num_params()))
 
 
 if __name__ == "__main__":
