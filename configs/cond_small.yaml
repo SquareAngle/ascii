@@ -1,0 +1,18 @@
+# Text-conditioned small model on the 64x32 canvas: frozen FLAN-T5-large encoder,
+# cross-attention in every block, 10% caption dropout for classifier-free guidance.
+# `captions` points at the Modal volume (modal_train.py mounts it at /vol); upload with
+#   modal volume put artscii <captions>.jsonl /captions/captions.jsonl
+name: cond_small
+size: small
+canvas_h: 32
+canvas_w: 64
+batch_size: 64
+lr: 3.0e-4
+warmup: 1000
+max_steps: 30000
+eval_every: 1000
+sample_every: 2500
+sample_temperature: 1.0
+captions: /vol/captions/captions.jsonl
+cond_drop: 0.1
+guidance: 2.0

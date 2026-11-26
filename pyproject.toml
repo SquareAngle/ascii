@@ -13,6 +13,8 @@ dependencies = [
     "pyyaml",
     "matplotlib",
     "pillow",
+    "transformers>=4.45,<5",  # FLAN-T5 text encoder (conditional training)
+    "sentencepiece",
 ]
 
 # cu126 wheels still ship sm_70 kernels (V100).

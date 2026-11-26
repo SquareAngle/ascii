@@ -45,17 +45,38 @@ def render(tokens: torch.Tensor, H: int, W: int) -> str:
     return "\n".join(rows).rstrip("\n")
 
 
+CAPTION_LEVELS = ("short", "medium", "long")
+
+
+def load_captions(path, min_confidence=0.0) -> dict[str, list[str]]:
+    """Caption file (modal_caption.py / claude_batch.py rows) -> {piece key: [short, medium,
+    long]}. Unclear, unparseable and low-confidence rows are left out; those pieces train
+    on the null condition. Rows without a confidence (the Qwen captioner) are kept."""
+    caps = {}
+    for line in open(path):
+        r = json.loads(line)
+        if r.get("unclear") or r.get("failed") or r.get("confidence", 1.0) < min_confidence:
+            continue
+        caps[r["key"]] = [r[k] for k in CAPTION_LEVELS]
+    return caps
+
+
 class AsciiArtDataset(Dataset):
     """Pieces that fit the canvas, with random flip/shift augmentation.
 
-    Returns {tokens: LongTensor[H*W], description: str} — `description` is the
-    (future) text-conditioning slot; for now it is the source category.
+    Returns {tokens: LongTensor[H*W], description: str, text: str}. `text` is one of the
+    piece's captions, picked at random each time (so the model sees all three levels of
+    detail), or "" when there are no captions or none for this piece.
     """
 
-    def __init__(self, path, H, W, flip_p=0.0, shift_p=0.0, limit=None):
+    def __init__(self, path, H, W, flip_p=0.0, shift_p=0.0, limit=None, captions=None):
+        from artscii.caption.vlm import piece_key
+
         self.H, self.W, self.flip_p, self.shift_p = H, W, flip_p, shift_p
         rows = [json.loads(l) for l in open(path)]
         self.items = [r for r in rows if r["h"] <= H and r["w"] <= W][:limit]
+        self.captions = ([captions.get(piece_key(r["art"])) for r in self.items]
+                         if captions is not None else [None] * len(self.items))
 
     def __len__(self):
         return len(self.items)
@@ -69,10 +90,15 @@ class AsciiArtDataset(Dataset):
         if random.random() < self.shift_p:
             top = random.randint(0, self.H - item["h"])
             left = random.randint(0, self.W - item["w"])
+        caps = self.captions[i]
         return dict(tokens=encode(lines, self.H, self.W, top, left),
-                    description=item["description"])
+                    description=item["description"], text=random.choice(caps) if caps else "")
+
+    def caption_coverage(self):
+        return sum(c is not None for c in self.captions) / max(1, len(self.captions))
 
 
 def collate(batch):
     return dict(tokens=torch.stack([b["tokens"] for b in batch]),
-                description=[b["description"] for b in batch])
+                description=[b["description"] for b in batch],
+                text=[b["text"] for b in batch])

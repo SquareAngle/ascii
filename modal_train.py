@@ -19,15 +19,21 @@ Every run passes resume=true, so re-running the same command (after a failure or
 24 h function limit) continues from the last ckpt.pt, which train.py writes every
 `sample_every` steps.
 """
+import os
+
 import modal
 
 GPU = "A100-80GB"
 
 app = modal.App("artscii-train")
-vol = modal.Volume.from_name("artscii", create_if_missing=True)
+VOLUME = os.environ.get("ARTSCII_VOLUME", "artscii")  # dataset, captions, runs
+vol = modal.Volume.from_name(VOLUME, create_if_missing=True)
+hf_vol = modal.Volume.from_name("hf-cache", create_if_missing=True)  # text encoder weights
 image = (
     modal.Image.debian_slim(python_version="3.11")
-    .pip_install("torch==2.7.1", "numpy", "pyyaml", "tqdm", "matplotlib", "pillow")
+    .pip_install("torch==2.7.1", "numpy", "pyyaml", "tqdm", "matplotlib", "pillow",
+                 "transformers==4.57.1", "sentencepiece")
+    .env({"HF_HOME": "/hf"})
     .add_local_python_source("artscii")
     .add_local_dir("configs", "/root/configs")
 )
@@ -37,7 +43,7 @@ VOLUME_PATHS = ["data_dir=/vol/processed", "ckpt_root=/vol/ckpt", "out_root=/vol
                 "resume=true"]
 
 
-@app.function(image=image, gpu=GPU, volumes={"/vol": vol}, timeout=24 * 3600,
+@app.function(image=image, gpu=GPU, volumes={"/vol": vol, "/hf": hf_vol}, timeout=24 * 3600,
               retries=2, cpu=8, memory=32768)
 def train(config: str, overrides: list[str]):
     import os
