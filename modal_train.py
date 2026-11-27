@@ -5,11 +5,19 @@ One-time setup (laptop or cluster login node):
     modal volume put ascii ~/artscii_data/processed /processed
 
 Train (same overrides as `python -m artscii.train --set ...`, comma-separated):
-    modal run --detach modal_train.py --overrides "name=uncond_small_modal"
-    modal run --detach modal_train.py --overrides "name=big,size=large,batch_size=128"
+    python modal_train.py --overrides "name=uncond_small_modal"
+    python modal_train.py --config configs/cond_small.yaml --overrides "name=big,size=large"
 
 Scaling sweep, one GPU per size in parallel (the cluster ran them one after another):
-    modal run --detach modal_train.py --sizes tiny,small,base,large
+    python modal_train.py --sizes tiny,small,base,large
+
+`python modal_train.py` deploys the app (with the current local code and configs) and
+spawns each run on it, then exits: the runs belong to the deployed app, so nothing local
+has to stay running. (`modal run --detach` ties the run to the launching process, and a
+run was cancelled when that process was killed.) Each launch prints the function call id;
+    python modal_train.py --cancel <id>        # stop one run
+    modal app stop artscii-train               # stop every run of the deployed app
+`modal run modal_train.py ...` (same flags) still runs attached, for short tests.
 
 Fetch results (log.jsonl, samples, config; checkpoints live under ckpt/<name>/):
     modal volume get ascii runs/<name> ./runs/
@@ -73,13 +81,36 @@ def train(config: str, overrides: list[str]):
     vol.commit()
 
 
-@app.local_entrypoint()
-def main(config: str = "configs/uncond_small.yaml", overrides: str = "", sizes: str = ""):
+def jobs(config, overrides, sizes):
+    """(config, overrides) per run: one run, or a sweep naming each run sweep_<size>
+    (activation checkpointing is unnecessary at 80 GB)."""
     sets = [kv.strip() for kv in overrides.split(",") if kv.strip()]
     if not sizes:
-        train.remote(config, sets)
-        return
-    # Sweep: name each run sweep_<size>; activation checkpointing is unnecessary at 80 GB.
-    jobs = [(config, [f"name=sweep_{s}", f"size={s}", *sets])
+        return [(config, sets)]
+    return [(config, [f"name=sweep_{s}", f"size={s}", *sets])
             for s in (s.strip() for s in sizes.split(",")) if s]
-    list(train.starmap(jobs))
+
+
+@app.local_entrypoint()
+def main(config: str = "configs/uncond_small.yaml", overrides: str = "", sizes: str = ""):
+    list(train.starmap(jobs(config, overrides, sizes)))
+
+
+if __name__ == "__main__":
+    import argparse
+
+    ap = argparse.ArgumentParser(description="Deploy the app and spawn training runs on it.")
+    ap.add_argument("--config", default="configs/uncond_small.yaml")
+    ap.add_argument("--overrides", default="")
+    ap.add_argument("--sizes", default="")
+    ap.add_argument("--cancel", metavar="CALL_ID", help="cancel a spawned run instead")
+    args = ap.parse_args()
+    if args.cancel:
+        modal.FunctionCall.from_id(args.cancel).cancel()
+        print(f"cancelled {args.cancel}")
+    else:
+        with modal.enable_output():
+            app.deploy()
+        for cfg, sets in jobs(args.config, args.overrides, args.sizes):
+            call = train.spawn(cfg, sets)
+            print(f"spawned {call.object_id}: {cfg} {' '.join(sets)}", flush=True)

@@ -6,7 +6,7 @@ Text-to-ASCII art generation using masked diffusion
 
 ```bash
 modal volume put ascii ~/artscii_data/processed /processed
-modal run --detach modal_train.py --overrides "name=uncond_small_modal"
+python modal_train.py --overrides "name=uncond_small_modal"   # deploys, spawns, exits
 modal run modal_eval.py --runs uncond_small_modal
 modal volume get ascii runs/uncond_small_modal ./runs/
 modal run modal_caption.py --limit 20   # caption pilot -> captions/pilot.html
@@ -20,7 +20,7 @@ Setting `captions` in the config (see `configs/cond_small.yaml`) trains a text-c
 
 ```bash
 modal volume put ascii captions.jsonl /captions/captions.jsonl
-modal run --detach modal_train.py --config configs/cond_small.yaml
+python modal_train.py --config configs/cond_small.yaml
 modal run modal_eval.py --runs cond_small --prompts "a cat;a sailboat on the water" --guidance 2
 ```
 
